@@ -1,0 +1,13 @@
+  
+# Dependencies
+node_modules/
+
+# Credentials
+.env
+.env.test
+
+# Webstorm/text editor meta
+.vscode
+
+# Distribution
+dist/
