@@ -6,6 +6,7 @@ import { SurveysRepository } from '../repositories/survey.repository';
 import { UsersRepository } from '../repositories/user.repository';
 import { SurveysUsersRepository } from '../repositories/surveysUsers.repository';
 import sendMailService from '../services/sendMail.service';
+import { AppError } from '../errors/app.error';
 
 
 class SendMailController {
@@ -19,17 +20,13 @@ class SendMailController {
     const user = await usersRepository.findOne({ email });
 
     if (!user) {
-        return response.status(400).json({
-            error: "User does not exists",
-        })
+        throw new AppError("User does not exists")
     }
 
     const survey = await surveysRepository.findOne({ id: survey_id });
 
     if (!survey) {
-        return response.status(400).json({
-            error: "Survey does not exists",
-        })
+        throw new AppError("Survey does not exists!")
     }
 
     // Salvar as informações na tabela surveyUser
